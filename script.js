@@ -1,20 +1,20 @@
+function displayTemperature(response) {
+  let temperatureElement = document.querySelector("#current-temperature");
+  let temperature = Math.round(response.data.temperature.current);
+  let cityElement = document.querySelector("#current-city");
+  cityElement.innerHTML = response.data.city;
+  temperatureElement.innerHTML = temperature;
+}
+
 function search(event) {
   event.preventDefault();
   let searchInputElement = document.querySelector("#search-input");
-  let cityElement = document.querySelector(`#current-city`);
   let city = searchInputElement.value;
-  cityElement.innerHTML = city;
 
-  let apiKey = "o264bt8e7db718ffba5d20417c0b8fa3";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+  let apiKey = "b2a5adcct04b33178913oc335f405433";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(displayTemperature);
-}
-function displayTemperature(response) {
-  console.log(response.data);
-  let temperatureElement = document.querySelector("#current-temp");
-  let currentTemperature = Math.round(response.data.temperature.current);
-  temperatureElement.innerHTML = currentTemperature;
 }
 
 function formatDate(date) {
@@ -37,7 +37,7 @@ function formatDate(date) {
     "Wednesday",
     "Thursday",
     "Friday",
-    "Saturday",
+    "Saturday"
   ];
 
   let formattedDay = days[day];
@@ -51,16 +51,3 @@ let currentDateELement = document.querySelector("#current-date");
 let currentDate = new Date();
 
 currentDateELement.innerHTML = formatDate(currentDate);
-
-window.onload = function () {
-  axios
-    .get("https://jsonplaceholder.typicode.com/posts/1")
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-    });
-};
-
-  
